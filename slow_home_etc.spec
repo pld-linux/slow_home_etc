@@ -5,12 +5,11 @@ Version:	0.0.1
 Release:	1
 License:	GPL
 Group:		Base
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	glibc-devel
-BuildRequires:	libtool
 Source0:	%{name}-%{version}.tar.bz2
 # Source0-md5:	7cd764d8e090308ad4a127542384fb0d
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,7 +36,9 @@ mechanizmu.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -49,4 +50,3 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS PRZECZYTAJ_TO
 %attr(755,root,root) %{_libdir}/lib*.so*
-%attr(755,root,root) %{_libdir}/lib*.la
