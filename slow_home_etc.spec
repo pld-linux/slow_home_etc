@@ -2,12 +2,13 @@ Summary:	HOME-ETC support for PLD Linux (version slow)
 Summary(pl):	Wsparcie mechanizmu HOME-ETC dla PLD Linux (wersja powolna)
 Name:		slow_home_etc
 Version:	0.0.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Base
 Source0:	%{name}-%{version}.tar.bz2
 # Source0-md5:	7cd764d8e090308ad4a127542384fb0d
 Patch0:		%{name}-relative.patch
+Patch1:		%{name}-link.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -27,6 +28,7 @@ mechanizmu.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
