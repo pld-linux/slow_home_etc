@@ -7,6 +7,7 @@ License:	GPL
 Group:		Base
 Source0:	%{name}-%{version}.tar.bz2
 # Source0-md5:	7cd764d8e090308ad4a127542384fb0d
+Patch0:		%{name}-relative.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -25,6 +26,7 @@ mechanizmu.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
