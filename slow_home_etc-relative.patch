@@ -1,0 +1,11 @@
+diff -Nru slow_home_etc-0.0.1.orig/home_etc.c slow_home_etc-0.0.1/home_etc.c
+--- slow_home_etc-0.0.1.orig/home_etc.c	2003-12-11 19:59:42.000000000 +0100
++++ slow_home_etc-0.0.1/home_etc.c	2003-12-13 13:10:52.000000000 +0100
+@@ -32,6 +32,7 @@
+ 	} else {
+ 		getcwd(buf, MAXLENGTH);
+ 		len = strlen(buf);
++		buf[len++] = '/';
+ 		strncpy(buf + len, pathname, MAXLENGTH - len);
+ 		end = strstr(buf, "/.");
+ 		if (!end) return NULL;
