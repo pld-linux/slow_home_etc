@@ -1,0 +1,89 @@
+--- slow_home_etc-0.0.1/home_etc.c	2003-12-14 09:22:43.000000000 +0100
++++ slow_home_etc-0.0.1/home_etc.c.new	2003-12-14 19:37:47.000000000 +0100
+@@ -30,6 +30,7 @@
+ 		strncpy(buf, pathname, MAXLENGTH);
+ 		end = buf + (end - pathname);
+ 	} else {
++		if (pathname[0] == '.' && (pathname[1] == '\0' || pathname[1] == '.')) return NULL;
+ 		getcwd(buf, MAXLENGTH);
+ 		len = strlen(buf);
+ 		buf[len++] = '/';
+@@ -442,6 +443,41 @@
+ 	}
+ }
+ 
++
++int link(const char *oldpath, const char *newpath)
++{
++	static int (*func)(const char *, const char *) = NULL;
++	char *error;
++	char *new_oldpath, *new_newpath, *path1, *path2;
++	int res;
++
++	if (!handle) handle = dlopen("/lib/libc.so.6", RTLD_LAZY);
++/* ENOMEM is fake, but something should be set */
++	if (!handle) {
++		errno = ENOMEM;
++		return -1;
++	}
++	if (!func) {
++		func = dlsym(handle, "link");
++		if ((error = dlerror()) != NULL) {
++			errno = ENOMEM;
++			return -1;
++		}
++	}
++	new_oldpath = home_etc_pathname(oldpath);
++	if (new_oldpath) path1 = new_oldpath;
++	else path1 = oldpath;
++	new_newpath = home_etc_pathname(newpath);
++	if (new_newpath) path2 = new_newpath;
++	else path2 = newpath;
++
++	res = (*func)(path1, path2);
++	if (new_oldpath) free(new_oldpath);
++	if (new_newpath) free(new_newpath);
++	return res;
++}
++
++
+ int lstat(const char *filename, struct stat *buf)
+ {
+ 	static int (*func)(const char *, struct stat *) = NULL;
+@@ -721,6 +757,36 @@
+ 	}
+ }
+ 
++int unlink(const char *pathname)
++{
++	static int (*func)(const char *) = NULL;
++	char *error;
++	unsigned char *new_pathname;
++
++	if (!handle) handle = dlopen("/lib/libc.so.6", RTLD_LAZY);
++/* ENOMEM is fake, but something should be set */
++	if (!handle) {
++		errno = ENOMEM;
++		return -1;
++	}
++	if (!func) {
++		func = dlsym(handle, "unlink");
++		if ((error = dlerror()) != NULL) {
++			errno = ENOMEM;
++			return -1;
++		}
++	}
++	new_pathname = home_etc_pathname(pathname);
++	if (!new_pathname) return (*func)(pathname);
++	else {
++		int res = (*func)(new_pathname);
++
++		free(new_pathname);
++		return res;
++	}
++}
++
++
+ int utime(const char *filename, const struct utimbuf *buf)
+ {
+ 	static int (*func)(const char *, const struct utimbuf *) = NULL;
