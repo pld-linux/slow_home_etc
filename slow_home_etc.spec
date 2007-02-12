@@ -1,5 +1,5 @@
 Summary:	HOME-ETC support for PLD Linux (version slow)
-Summary(pl):	Wsparcie mechanizmu HOME-ETC dla PLD Linux (wersja powolna)
+Summary(pl.UTF-8):   Wsparcie mechanizmu HOME-ETC dla PLD Linux (wersja powolna)
 Name:		slow_home_etc
 Version:	0.0.1
 Release:	2
@@ -19,9 +19,9 @@ HOME-ETC is an idea to keep configuration files in a subdirectory
 specified by user, instead of its home directory. This package
 provides support for it.
 
-%description -l pl
-HOME-ETC jest pomys≥em, aby przechowywaÊ pliki konfiguracyjne
-w podkatalogu wskazanym przez uøytkownika, zamiast bezpo∂rednio
+%description -l pl.UTF-8
+HOME-ETC jest pomys≈Çem, aby przechowywaƒá pliki konfiguracyjne
+w podkatalogu wskazanym przez u≈ºytkownika, zamiast bezpo≈õrednio
 w jego katalogu domowym. Pakiet ten zapewnia wsparcie dla tego
 mechanizmu.
 
