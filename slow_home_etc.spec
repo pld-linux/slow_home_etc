@@ -1,5 +1,5 @@
 Summary:	HOME-ETC support for PLD Linux (version slow)
-Summary(pl.UTF-8):   Wsparcie mechanizmu HOME-ETC dla PLD Linux (wersja powolna)
+Summary(pl.UTF-8):	Wsparcie mechanizmu HOME-ETC dla PLD Linux (wersja powolna)
 Name:		slow_home_etc
 Version:	0.0.1
 Release:	2
